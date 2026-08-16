@@ -1,0 +1,5 @@
+# Multi-File Keyword Search Tool
+# This project only uses Python's built-in standard library
+# (os, datetime), so there are no third-party packages to install.
+#
+# Requires: Python 3.4+
