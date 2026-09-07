@@ -1,0 +1,23 @@
+[
+    {
+        "id":"policy1",
+        "text":"Employees rceive 20 annual leave days every year."
+    },
+{
+    "id":"policy2",
+        "text":"Employees can work from home two days week."
+},
+{
+    "id":"policy3",
+        "text":"Expense clams must be submitted within 30 days."
+},
+{
+    "id":"policy4",
+        "text":"Emloyess should change their account password every 90 days."
+    
+},
+{
+    "id":"policy5",
+        "text":"New employees complete a three month probation period."
+}
+]

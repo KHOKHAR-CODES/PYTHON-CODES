@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Python Basics",
+    "content": "Python is a beginner-friendly programming language used for web development, automation, data analysis, and artificial intelligence."
+  },
+  {
+    "id": 2,
+    "title": "Machine Learning",
+    "content": "Machine learning is a field of artificial intelligence where computers learn patterns from data to make predictions or decisions."
+  },
+  {
+    "id": 3,
+    "title": "Vector Databases",
+    "content": "A vector database stores embeddings and supports efficient similarity search for large collections of text, images, or other data."
+  },
+  {
+    "id": 4,
+    "title": "Embeddings",
+    "content": "Embeddings are numerical vector representations of text or other data that preserve semantic meaning."
+  },
+  {
+    "id": 5,
+    "title": "Cosine Similarity",
+    "content": "Cosine similarity measures how similar two vectors are by calculating the cosine of the angle between them."
+  },
+  {
+    "id": 6,
+    "title": "Retrieval Augmented Generation",
+    "content": "Retrieval augmented generation, also called RAG, retrieves relevant documents before an AI model creates an answer."
+  }
+]

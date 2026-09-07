@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "topic": "technology",
+    "text": "Artificial intelligence is transforming how software is designed and deployed."
+  },
+  {
+    "id": 2,
+    "topic": "technology",
+    "text": "Quantum computers use qubits to perform calculations that are infeasible for classical machines."
+  },
+  {
+    "id": 3,
+    "topic": "technology",
+    "text": "Open source software encourages collaboration among developers worldwide."
+  },
+  {
+    "id": 4,
+    "topic": "nature",
+    "text": "The Amazon rainforest is home to millions of species of plants and animals."
+  },
+  {
+    "id": 5,
+    "topic": "nature",
+    "text": "Coral reefs provide shelter and food for roughly a quarter of all marine species."
+  },
+  {
+    "id": 6,
+    "topic": "nature",
+    "text": "Migratory birds travel thousands of kilometers between breeding and wintering grounds."
+  },
+  {
+    "id": 7,
+    "topic": "food",
+    "text": "Fermentation has been used for centuries to preserve food and develop new flavors."
+  },
+  {
+    "id": 8,
+    "topic": "food",
+    "text": "A well balanced meal typically includes proteins, carbohydrates, and healthy fats."
+  },
+  {
+    "id": 9,
+    "topic": "sports",
+    "text": "Marathon runners often follow a structured training plan for months before race day."
+  },
+  {
+    "id": 10,
+    "topic": "sports",
+    "text": "Team sports like soccer require both individual skill and coordinated strategy."
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "PY-001",
+    "text": "A Python list is an ordered, changeable collection. Use append() to add one item to the end of a list.",
+    "source": "Python Lists Guide"
+  },
+  {
+    "id": "PY-002",
+    "text": "A Python dictionary stores data as key and value pairs. Access a value by writing the key inside square brackets.",
+    "source": "Python Dictionaries Guide"
+  },
+  {
+    "id": "PY-003",
+    "text": "Use a for loop to repeat code for every item in a list, string, or other iterable object.",
+    "source": "Python Loops Guide"
+  },
+  {
+    "id": "PY-004",
+    "text": "A function is reusable code defined with the def keyword. Functions can accept parameters and return a result.",
+    "source": "Python Functions Guide"
+  },
+  {
+    "id": "PY-005",
+    "text": "Use try and except to handle errors without stopping the whole Python program.",
+    "source": "Python Error Handling Guide"
+  },
+  {
+    "id": "PY-006",
+    "text": "The json module converts Python dictionaries and lists to JSON text with json.dumps(), and reads JSON text with json.loads().",
+    "source": "Python JSON Guide"
+  },
+  {
+    "id": "PY-007",
+    "text": "Use the open function or pathlib Path to read from and write to files. Use read_text() to read a text file.",
+    "source": "Python File Handling Guide"
+  },
+  {
+    "id": "PY-008",
+    "text": "A Python class is created with the class keyword. An object is an instance of a class and can contain data and methods.",
+    "source": "Python Classes Guide"
+  },
+  {
+    "id": "PY-009",
+    "text": "Use pip install followed by a package name to install a Python library, for example pip install sentence-transformers.",
+    "source": "Python Packages Guide"
+  }
+]

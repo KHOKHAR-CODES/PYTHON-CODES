@@ -1,0 +1,8 @@
+pypdf
+python-docx
+tiktoken
+faiss-cpu
+sentence-transformers
+numpy
+google-genai
+python-dotenv
