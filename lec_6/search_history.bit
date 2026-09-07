@@ -1,0 +1,5 @@
+file=data.txt | keyword='python' | matching_lines=2 | occurrences=2
+file=data.txt | keyword='rag' | matching_lines=3 | occurrences=3
+file=data.txt | keyword='vector' | matching_lines=5 | occurrences=5
+file=search_results.txt | keyword='vector' | matching_lines=8 | occurrences=8
+file=search_history.bit | keyword='vector' | matching_lines=2 | occurrences=2

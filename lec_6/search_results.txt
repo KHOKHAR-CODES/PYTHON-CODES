@@ -1,0 +1,60 @@
+==================================================
+Source file : data.txt
+Keyword     : python
+Matching lines : 2
+Total keyword occurrences : 2
+--------------------------------------------------
+Line 1: Python is a popular programming language used widely in AI development.
+Line 12: Python libraries make it easy to call APIs, generate embeddings, and query vector databases.
+==================================================
+
+==================================================
+Source file : data.txt
+Keyword     : rag
+Matching lines : 3
+Total keyword occurrences : 3
+--------------------------------------------------
+Line 3: RAG stands for Retrieval-Augmented Generation, a technique combining search and generation.
+Line 4: RAG systems retrieve relevant documents before generating an answer with an AI model.
+Line 11: A vector database is a key component in most modern RAG pipelines.
+==================================================
+
+==================================================
+Source file : data.txt
+Keyword     : vector
+Matching lines : 5
+Total keyword occurrences : 5
+--------------------------------------------------
+Line 5: Embeddings are numerical vector representations of text, images, or other data.
+Line 6: Good embeddings capture semantic meaning so similar documents have similar vectors.
+Line 10: Vector databases store embeddings efficiently and support fast similarity search.
+Line 11: A vector database is a key component in most modern RAG pipelines.
+Line 12: Python libraries make it easy to call APIs, generate embeddings, and query vector databases.
+==================================================
+
+==================================================
+Source file : search_results.txt
+Keyword     : vector
+Matching lines : 8
+Total keyword occurrences : 8
+--------------------------------------------------
+Line 8: Line 12: Python libraries make it easy to call APIs, generate embeddings, and query vector databases.
+Line 19: Line 11: A vector database is a key component in most modern RAG pipelines.
+Line 24: Keyword     : vector
+Line 28: Line 5: Embeddings are numerical vector representations of text, images, or other data.
+Line 29: Line 6: Good embeddings capture semantic meaning so similar documents have similar vectors.
+Line 30: Line 10: Vector databases store embeddings efficiently and support fast similarity search.
+Line 31: Line 11: A vector database is a key component in most modern RAG pipelines.
+Line 32: Line 12: Python libraries make it easy to call APIs, generate embeddings, and query vector databases.
+==================================================
+
+==================================================
+Source file : search_history.bit
+Keyword     : vector
+Matching lines : 2
+Total keyword occurrences : 2
+--------------------------------------------------
+Line 3: file=data.txt | keyword='vector' | matching_lines=5 | occurrences=5
+Line 4: file=search_results.txt | keyword='vector' | matching_lines=8 | occurrences=8
+==================================================
+
