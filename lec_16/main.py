@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
+from embedingutlis import get_embedder, embed_text
 
 from langchain_core.output_parsers import StrOutputParser
 from prompts import study_prompt
@@ -71,6 +72,17 @@ def main():
     except Exception as error:
         print("\nThe program could not run.")
         print("\nTechinal details: ", error)
+
+def main():
+    embedder = get_embedder()
+ 
+    text = input("Enter your text: ")
+ 
+    vector = embed_text(text, embedder)
+ 
+    print("\nEmbedding vector:")
+    print(vector)
+    print(f"\nEmbedding dimension: {len(vector)}")
 
 
 

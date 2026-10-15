@@ -1,0 +1,4 @@
+# Optional dependencies for evaluation/ragas_evaluation.py.
+# Ragas 0.1.x avoids scikit-network, but requires a Python version with a
+# compatible NumPy 1.26 wheel (Python 3.13 or earlier).
+ragas>=0.1.9,<0.2.0

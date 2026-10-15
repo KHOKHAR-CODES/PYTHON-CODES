@@ -1,0 +1,15 @@
+sentence-transformers
+transformers
+torch
+faiss-cpu
+pypdf
+python-docx
+beautifulsoup4
+pandas
+python-dotenv
+huggingface_hub
+datasets
+langchain-huggingface
+markdown
+flask
+flask
