@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f4f7">
+<meta name="description" content="RAG Studio — session-aware conversational retrieval workspace.">
+<meta name="color-scheme" content="light dark">
+<title>RAG Studio — Context Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient background -->
+<div class="ambient ambient-a" aria-hidden="true"></div>
+<div class="ambient ambient-b" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="RAG Studio home">
+    <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+    <span class="brand-copy"><strong>RAG Studio</strong><small>Context intelligence</small></span>
+  </a>
+  <div class="topbar-center"><span class="product-badge">CONVERSATIONAL RAG</span></div>
+  <div class="topbar-actions">
+    <span id="connection-pill" class="status-pill is-checking"><i></i><span>Checking</span></span>
+    <button class="icon-button" id="theme-toggle" type="button" title="Toggle appearance" aria-label="Toggle appearance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 14.8A8.5 8.5 0 0 1 9.2 3.6 8.5 8.5 0 1 0 20.4 14.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="avatar-button" id="session-menu-button" type="button" title="Session options" aria-label="Session options">S</button>
+    <button class="icon-button" id="sound-toggle" type="button" title="Sounds" aria-label="Toggle sounds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</header>
+
+<main id="top" class="app-shell">
+  <aside class="sidebar glass-panel" id="sidebar" aria-label="Workspace controls">
+    <div class="sidebar-scroll">
+      <section class="side-section session-section">
+        <div class="section-kicker">Workspace</div>
+        <div class="session-card clay">
+          <div class="session-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+          <div class="session-copy"><span>Active session</span><strong id="session-label">student_001</strong></div>
+          <button class="mini-button" id="new-session" type="button" title="Create a new session" aria-label="Create a new session"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <div class="section-heading"><div><div class="section-kicker">Knowledge</div><h2>Session documents</h2></div><span class="count-badge" id="doc-count">0</span></div>
+        <label class="upload-drop clay" id="upload-drop" for="file-input" tabindex="0">
+          <input id="file-input" type="file" accept=".pdf,.docx,.txt,.md,.markdown" hidden>
+          <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M5 15v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <strong>Drop knowledge here</strong>
+          <small>PDF, DOCX, TXT or Markdown · 10 MB</small>
+        </label>
+        <div id="documents-list" class="documents-list"><div class="empty-state compact"><span>◇</span><p>No session documents yet.</p></div></div>
+      </section>
+
+      <section class="side-section">
+        <div class="section-heading"><div><div class="section-kicker">Retrieval</div><h2>Precision controls</h2></div><svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="11" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <div class="control-block"><div class="control-row"><label for="top-k">Top K</label><output id="top-k-value">3</output></div><input id="top-k" class="range" type="range" min="1" max="10" value="3"></div>
+        <div class="control-block"><div class="control-row"><label for="threshold">Similarity threshold</label><output id="threshold-value">0.05</output></div><input id="threshold" class="range" type="range" min="-1" max="1" step="0.01" value="0.05"></div>
+      </section>
+
+      <section class="side-section side-actions">
+        <button class="side-button" id="refresh-history" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.7-4L3 10m0-4v4h4M4 13a8 8 0 0 0 14.7 4L21 14m0 4v-4h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Refresh conversation</button>
+        <button class="side-button" id="summarize-history" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9L12 2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg> Summarize context</button>
+        <button class="side-button danger" id="clear-history" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16m-10 4v6m4-6v6M9 7V4h6v3m-9 0 1 14h10l1-14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Clear conversation</button>
+      </section>
+
+      <section class="side-section backend-section">
+        <div class="section-kicker">Connection</div>
+        <label class="field-label" for="api-url">Backend URL</label>
+        <div class="input-with-action"><input id="api-url" type="url" value="http://localhost:8000" spellcheck="false"><button id="save-api" class="mini-button" type="button" title="Save backend URL" aria-label="Save backend URL"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <p class="microcopy">FastAPI is the source of truth. This client contains no RAG logic.</p>
+      </section>
+    </div>
+  </aside>
+
+  <section class="workspace" aria-label="Main workspace">
+    <section class="hero glass-panel" id="hero" aria-labelledby="hero-title">
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-orb"><span>RAG</span><small>Context AI</small></div>
+        <div class="halo halo-one"></div>
+        <div class="halo halo-two"></div>
+        <div class="halo halo-three"></div>
+        <div class="orbit-chip chip-one">Retrieval</div>
+        <div class="orbit-chip chip-two">Embeddings</div>
+        <div class="orbit-chip chip-three">LLM</div>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Your private context layer</div>
+        <h1 id="hero-title">Ask smarter.<br><span>Stay in context.</span></h1>
+        <p>Conversational retrieval that remembers the thread, respects session boundaries, and keeps evidence one glance away.</p>
+        <div class="hero-actions"><button class="primary-button" id="hero-focus" type="button">Start asking <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="secondary-button" id="hero-health" type="button">Run diagnostics</button></div>
+        <div class="trust-row"><b>FastAPI</b> · <b>OpenAI</b> · <b>SQLite</b> · <b>Production Ready</b></div>
+      </div>
+    </section>
+
+    <section class="chat-layout" aria-label="Conversation">
+      <section class="chat-panel glass-panel" aria-label="Chat panel">
+        <header class="chat-header">
+          <h2>Context conversation</h2>
+          <div class="header-tools">
+            <span class="latency-dot" id="last-latency">Ready</span>
+            <button class="icon-button" id="open-docs" type="button" title="Open docs" aria-label="Open docs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+            <button class="icon-button" id="scroll-bottom" type="button" title="Scroll to bottom" aria-label="Scroll to bottom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-5-5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </header>
+        <div class="messages" id="messages" aria-live="polite" aria-atomic="false"></div>
+        <div class="composer-wrap">
+          <form class="composer" id="chat-form" aria-label="Ask a question">
+            <textarea id="question" placeholder="Ask a question or continue the conversation…" rows="1" aria-label="Question input"></textarea>
+            <div class="composer-footer">
+              <div class="composer-hints">
+                <button class="hint-chip" type="button" data-prompt="What is retrieval-augmented generation?">What is RAG?</button>
+                <button class="hint-chip" type="button" data-prompt="Can you summarize this session?">Summarize</button>
+                <button class="hint-chip" type="button" data-prompt="What sources were used for the last answer?">Sources</button>
+              </div>
+              <button class="send-button" id="send-button" type="submit" aria-label="Send" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 4 16 8-16 8 3-8-3-8Zm3 8h13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </form>
+          <p class="kbd">Enter to send · Shift+Enter for new line</p>
+        </div>
+      </section>
+
+      <aside class="inspector" aria-label="Performance inspector">
+        <section class="inspector-card glass-panel" aria-label="Performance metrics">
+          <h3>Performance</h3>
+          <div class="metric-grid" id="metric-grid">
+            <div><span>Latency</span><strong>—</strong></div>
+            <div><span>Embeddings</span><strong>—</strong></div>
+            <div><span>Retrieval</span><strong>—</strong></div>
+            <div><span>LLM</span><strong>—</strong></div>
+          </div>
+        </section>
+        <section class="inspector-card glass-panel" aria-label="Retrieved sources">
+          <h3>Sources <span id="source-count" class="count-badge">0</span></h3>
+          <div class="sources-list" id="sources"><div class="empty-state compact"><span>◇</span><p>Sources appear after an answer.</p></div></div>
+        </section>
+        <section class="inspector-card glass-panel" aria-label="Diagnostics">
+          <h3>Diagnostics</h3>
+          <div class="diagnostic-list" id="diag-list">
+            <div><strong>API</strong><span id="diag-api">—</span></div>
+            <div><strong>Vector store</strong><span id="diag-vector">—</span></div>
+            <div><strong>Embedding</strong><span id="diag-embed">—</span></div>
+            <div><strong>LLM</strong><span id="diag-llm">—</span></div>
+          </div>
+          <button class="text-button" id="run-diag" type="button">Run diagnostics</button>
+        </section>
+      </aside>
+    </section>
+  </section>
+</main>
+
+<!-- Modals -->
+<div class="modal-backdrop" id="modal-backdrop" hidden aria-modal="true" role="dialog" aria-labelledby="modal-title">
+  <div class="modal glass-panel">
+    <header class="modal-header"><h2 id="modal-title">Context summary</h2><button class="icon-button" id="modal-close" type="button" aria-label="Close">✕</button></header>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- Toast region -->
+<div class="toast-region" id="toast-region" aria-live="assertive" aria-atomic="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

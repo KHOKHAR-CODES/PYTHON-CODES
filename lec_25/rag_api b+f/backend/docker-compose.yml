@@ -1,0 +1,27 @@
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - BASE_URL=http://localhost:8000
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8000
+    volumes:
+      - ./vector_db:/app/vector_db
+      - ./data:/app/data:ro
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+
+  rag-frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://localhost:8000
+    depends_on:
+      - rag-api
+    restart: unless-stopped

@@ -1,0 +1,422 @@
+{
+  "info": {
+    "_postman_id": "3eebbe0f-5e5b-4a0b-9a5c-7c9d3e4a1b2c",
+    "name": "RAG Question Answering API",
+    "description": "Postman collection for the FastAPI RAG backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status is 200', () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test('status exists', () => pm.expect(body.status).to.exist);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Readiness",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ready",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ready"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status is 200', () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test('components exist', () => pm.expect(body.components).to.exist);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": []
+        }
+      }
+    },
+    {
+      "name": "Index Sample Document",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"document_name\": \"sample.txt\",\n  \"content\": \"FastAPI is a modern Python web framework for building APIs. It is built around Python type hints and provides automatic OpenAPI documentation.\\n\\nRetrieval-Augmented Generation, or RAG, combines information retrieved from an external knowledge source with a language model prompt. The retrieved context is used to ground the generated answer.\\n\\nEmbeddings represent text as vectors. A vector store can compare an embedded question with embedded document chunks to retrieve semantically related content.\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/documents/index",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "documents",
+            "index"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Normal Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"What is FastAPI?\",\n  \"top_k\": 3\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status is 200', () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test('answer exists', () => pm.expect(body.answer).to.exist);",
+              "pm.test('sources exists', () => pm.expect(body.sources).to.be.an('array'));",
+              "pm.test('request_id exists', () => pm.expect(body.request_id).to.exist);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "RAG Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"What is Retrieval-Augmented Generation?\",\n  \"top_k\": 3\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "event": []
+    },
+    {
+      "name": "Small Top-K",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"How are embeddings used?\",\n  \"top_k\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "event": []
+    },
+    {
+      "name": "Irrelevant Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"What is the weather today?\",\n  \"top_k\": 3,\n  \"similarity_threshold\": 0.95\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status is 200', () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test('no sources when context is insufficient', () => pm.expect(body.sources).to.eql([]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empty Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"\",\n  \"top_k\": 3\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('status is 422', () => pm.response.to.have.status(422));",
+              "const body = pm.response.json();",
+              "pm.test('error structure exists', () => pm.expect(body.error).to.exist);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/chat",
+          "host": [
+            "{{base_url}}",
+            "chat"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"student_001\",\n  \"question\": \"What is RAG?\",\n  \"top_k\": 3\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Attach Document",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/attach-document",
+          "host": [
+            "{{base_url}}",
+            "attach-document"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"student_001\",\n  \"file_path\": \"data/rag.pdf\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/history/student_001",
+          "host": [
+            "{{base_url}}",
+            "history",
+            "student_001"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Clear History",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/history/student_001",
+          "host": [
+            "{{base_url}}",
+            "history",
+            "student_001"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Summarize History",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/summarize-history",
+          "host": [
+            "{{base_url}}",
+            "summarize-history"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"student_001\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Session Documents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/session/student_001/documents",
+          "host": [
+            "{{base_url}}",
+            "session",
+            "student_001",
+            "documents"
+          ]
+        }
+      }
+    }
+  ]
+}
