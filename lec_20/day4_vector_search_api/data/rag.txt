@@ -1,0 +1,16 @@
+Retrieval-Augmented Generation (RAG) combines a retriever and a generator to produce
+answers grounded in external documents rather than relying solely on a language
+model's parametric memory.
+
+The retrieval stage typically works as follows: documents are loaded, cleaned, and
+split into overlapping chunks. Each chunk is converted into a dense vector embedding
+using a sentence embedding model. These embeddings are stored in a vector index that
+supports fast approximate or exact nearest-neighbor search.
+
+At query time, the user's question is embedded using the same model, and the vector
+index is searched for the top-k most similar chunks. Those chunks are then passed to
+a generator model as context, allowing it to produce an answer grounded in the
+source material.
+
+This sample file exists purely as placeholder content so the /index-file endpoint
+has something concrete to load, clean, split, embed, and store during local testing.

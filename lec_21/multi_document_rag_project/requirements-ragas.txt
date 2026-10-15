@@ -1,0 +1,12 @@
+# RAGAS evaluation extra — compatible version set for Python 3.14 and current
+# Hugging Face / LangChain stacks. RAGAS 0.2.x expects the LangChain 0.3.x
+# family; newer combinations can break on import (ContextOverflowError /
+# ChatVertexAI API moves). Keep NumPy on a wheel-supported version so pip does
+# not try to compile from source on Python 3.14.
+ragas==0.2.15
+langchain-community>=0.3.0,<0.4.0
+langchain-huggingface>=0.3.0,<0.4.0
+langchain-openai>=0.3.0,<0.4.0
+sentence-transformers>=3.2.0,<4.0.0
+datasets>=2.20.0,<3.0.0
+numpy>=2.0.0,<3.0.0

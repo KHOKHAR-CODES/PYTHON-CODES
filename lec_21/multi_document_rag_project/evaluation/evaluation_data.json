@@ -1,0 +1,20 @@
+[
+  {
+    "question": "How many annual leave days are allowed?",
+    "ground_truth": "Employees receive 20 paid annual leave days per year.",
+    "answer": "",
+    "contexts": []
+  },
+  {
+    "question": "What is the notice period required before resigning?",
+    "ground_truth": "Employees must provide 30 days written notice before resigning.",
+    "answer": "",
+    "contexts": []
+  },
+  {
+    "question": "Are employees allowed to work remotely?",
+    "ground_truth": "Remote work is allowed up to two days per week with manager approval.",
+    "answer": "",
+    "contexts": []
+  }
+]
